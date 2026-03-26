@@ -120,7 +120,6 @@ html, body {
   position: absolute;
   top: 30px;
   bottom: 30px;
-  width: calc(100% - 30px);
   border: 1px solid rgba(184,151,46,0.18);
   pointer-events: none;
 }
@@ -142,7 +141,6 @@ html, body {
   position: absolute;
   top: 50px;
   bottom: 50px;
-  width: calc(100% - 50px);
   border: 1px solid rgba(184,151,46,0.08);
   pointer-events: none;
 }
@@ -320,10 +318,12 @@ html, body {
 
   .door-left .door-border {
     left: 20px;
+    right: 0;
   }
 
   .door-right .door-border {
     right: 20px;
+    left: 0;
   }
 
   .door-border-inner {
@@ -333,10 +333,12 @@ html, body {
 
   .door-left .door-border-inner {
     left: 35px;
+    right: 0;
   }
 
   .door-right .door-border-inner {
     right: 35px;
+    left: 0;
   }
 
   .diamond-line {
@@ -366,10 +368,12 @@ html, body {
 
   .door-left .door-border {
     left: 15px;
+    right: 0;
   }
 
   .door-right .door-border {
     right: 15px;
+    left: 0;
   }
 
   .door-border-inner {
