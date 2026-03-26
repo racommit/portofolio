@@ -52,8 +52,8 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="arc-hero">
-  <div class="arc-hero-bg" style="background-image:url(img/coding5.jpg)"></div>
-  <div class="arc-hero-overlay"></div>
+  <canvas id="circuitCanvas" class="arc-hero-canvas"></canvas>
+  <div class="arc-hero-overlay arc-hero-overlay-circuit"></div>
   <div class="arc-hero-content">
     <div class="arc-hero-label">
       <span class="arc-label-dot"></span>
@@ -421,6 +421,187 @@
   </div>
 </footer>
 
+
+<!-- ═══════════ CIRCUIT CANVAS ═══════════ -->
+<script>
+(function(){
+  var c=document.getElementById('circuitCanvas'),ctx=c.getContext('2d');
+  var W,H,nodes=[],traces=[],sparks=[],pulses=[];
+  var COLS,ROWS,SPACING=50,NODE_COUNT;
+
+  function resize(){
+    W=c.width=c.parentElement.offsetWidth;
+    H=c.height=c.parentElement.offsetHeight;
+    COLS=Math.ceil(W/SPACING)+2;ROWS=Math.ceil(H/SPACING)+2;
+    NODE_COUNT=COLS*ROWS;
+    initCircuit();
+  }
+
+  function initCircuit(){
+    nodes=[];traces=[];sparks=[];pulses=[];
+    for(var r=0;r<ROWS;r++){
+      for(var cl=0;cl<COLS;cl++){
+        var x=cl*SPACING+((r%2)*SPACING*0.5);
+        var y=r*SPACING;
+        nodes.push({x:x,y:y,active:Math.random()<0.3,size:Math.random()*2+1,pulse:0,glow:0});
+      }
+    }
+    // Create traces between nearby nodes
+    for(var i=0;i<nodes.length;i++){
+      var a=nodes[i];if(!a.active&&Math.random()<0.5)continue;
+      for(var j=i+1;j<nodes.length;j++){
+        var b=nodes[j];
+        var dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<SPACING*1.6&&Math.random()<0.4){
+          traces.push({a:i,b:j,energy:0,maxEnergy:Math.random()*0.6+0.1,speed:Math.random()*0.02+0.005});
+        }
+      }
+    }
+    // Init pulses (electricity traveling along traces)
+    for(var p=0;p<Math.min(30,traces.length);p++){
+      spawnPulse();
+    }
+  }
+
+  function spawnPulse(){
+    if(traces.length===0)return;
+    var ti=Math.floor(Math.random()*traces.length);
+    var t=traces[ti];
+    pulses.push({trace:ti,pos:0,speed:Math.random()*0.03+0.01,life:1,color:Math.random()<0.6?'67,83,255':'0,200,255'});
+  }
+
+  function spawnSpark(x,y){
+    var count=Math.floor(Math.random()*5)+3;
+    for(var i=0;i<count;i++){
+      var angle=Math.random()*Math.PI*2;
+      var speed=Math.random()*2+0.5;
+      sparks.push({x:x,y:y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1,decay:Math.random()*0.03+0.02,
+        color:Math.random()<0.5?'67,83,255':'0,220,255'});
+    }
+  }
+
+  function update(){
+    // Update pulses
+    for(var i=pulses.length-1;i>=0;i--){
+      var p=pulses[i];
+      p.pos+=p.speed;
+      if(p.pos>=1){
+        var t=traces[p.trace];
+        var n=nodes[t.b];
+        n.glow=1;
+        if(Math.random()<0.15)spawnSpark(n.x,n.y);
+        pulses.splice(i,1);
+        spawnPulse();
+      }
+    }
+    // Update sparks
+    for(var i=sparks.length-1;i>=0;i--){
+      var s=sparks[i];
+      s.x+=s.vx;s.y+=s.vy;
+      s.vx*=0.96;s.vy*=0.96;
+      s.life-=s.decay;
+      if(s.life<=0)sparks.splice(i,1);
+    }
+    // Update node glow
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i];
+      if(n.glow>0)n.glow=Math.max(0,n.glow-0.02);
+    }
+    // Random new pulse bursts
+    if(Math.random()<0.05)spawnPulse();
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // Background grid glow
+    ctx.fillStyle='#050810';
+    ctx.fillRect(0,0,W,H);
+
+    // Draw traces
+    for(var i=0;i<traces.length;i++){
+      var t=traces[i],a=nodes[t.a],b=nodes[t.b];
+      ctx.beginPath();
+      ctx.moveTo(a.x,a.y);
+      // Sometimes draw L-shaped traces for circuit look
+      if(i%3===0){
+        ctx.lineTo(b.x,a.y);ctx.lineTo(b.x,b.y);
+      }else if(i%3===1){
+        ctx.lineTo(a.x,b.y);ctx.lineTo(b.x,b.y);
+      }else{
+        ctx.lineTo(b.x,b.y);
+      }
+      ctx.strokeStyle='rgba(67,83,255,'+t.maxEnergy*0.15+')';
+      ctx.lineWidth=0.5;
+      ctx.stroke();
+    }
+
+    // Draw pulses on traces
+    for(var i=0;i<pulses.length;i++){
+      var p=pulses[i],t=traces[p.trace];
+      var a=nodes[t.a],b=nodes[t.b];
+      var px,py;
+      if(p.trace%3===0){
+        if(p.pos<0.5){px=a.x+(b.x-a.x)*(p.pos*2);py=a.y;}
+        else{px=b.x;py=a.y+(b.y-a.y)*((p.pos-0.5)*2);}
+      }else if(p.trace%3===1){
+        if(p.pos<0.5){px=a.x;py=a.y+(b.y-a.y)*(p.pos*2);}
+        else{px=a.x+(b.x-a.x)*((p.pos-0.5)*2);py=b.y;}
+      }else{
+        px=a.x+(b.x-a.x)*p.pos;py=a.y+(b.y-a.y)*p.pos;
+      }
+      // Glow
+      var grad=ctx.createRadialGradient(px,py,0,px,py,12);
+      grad.addColorStop(0,'rgba('+p.color+',0.8)');
+      grad.addColorStop(1,'rgba('+p.color+',0)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(px-12,py-12,24,24);
+      // Core dot
+      ctx.beginPath();ctx.arc(px,py,2,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.color+',1)';ctx.fill();
+    }
+
+    // Draw nodes
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i];
+      if(!n.active&&n.glow<=0)continue;
+      var alpha=n.active?0.25:0;
+      alpha+=n.glow*0.8;
+      if(alpha<=0)continue;
+      // Node glow
+      if(n.glow>0.1){
+        var g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,18);
+        g.addColorStop(0,'rgba(67,83,255,'+n.glow*0.5+')');
+        g.addColorStop(1,'rgba(67,83,255,0)');
+        ctx.fillStyle=g;
+        ctx.fillRect(n.x-18,n.y-18,36,36);
+      }
+      ctx.beginPath();ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
+      ctx.fillStyle='rgba(67,83,255,'+alpha+')';
+      ctx.fill();
+    }
+
+    // Draw sparks (electricity)
+    for(var i=0;i<sparks.length;i++){
+      var s=sparks[i];
+      ctx.beginPath();ctx.arc(s.x,s.y,1.5*s.life,0,Math.PI*2);
+      ctx.fillStyle='rgba('+s.color+','+s.life+')';
+      ctx.fill();
+      // Spark trail
+      if(s.life>0.3){
+        ctx.beginPath();
+        ctx.moveTo(s.x,s.y);
+        ctx.lineTo(s.x-s.vx*4,s.y-s.vy*4);
+        ctx.strokeStyle='rgba('+s.color+','+(s.life*0.5)+')';
+        ctx.lineWidth=0.8;ctx.stroke();
+      }
+    }
+  }
+
+  function loop(){update();draw();requestAnimationFrame(loop);}
+  window.addEventListener('resize',resize);
+  resize();loop();
+})();
+</script>
 
 <!-- ═══════════ SCRIPTS ═══════════ -->
 <script>
