@@ -19,6 +19,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/bootstrap.css" >
   <link rel="stylesheet" href="css/style2.css" >
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <title>Portofolio</title>
 </head>
@@ -179,297 +180,210 @@
 
 
 <!-- projects -->
-<div class="container-fluid projects-section" id="Projects">
+<div class="container-fluid arc-projects" id="Projects">
 
-  <!-- Arcane decorative top border -->
-  <div class="arcane-divider">
-    <div class="arcane-line"></div>
-    <div class="arcane-diamond"></div>
-    <div class="arcane-line"></div>
+  <!-- Section Header -->
+  <div class="arc-projects-header">
+    <div class="arc-label">
+      <span class="arc-label-dot"></span>
+      <span>Featured Works</span>
+    </div>
+    <h2 class="arc-section-title" data-scroll-title>
+      Featured<br><span class="arc-title-outline">Works</span>
+    </h2>
   </div>
 
-  <div class="container">
-    <h2 class="projects-heading">My Projects</h2>
-    <p class="projects-subtitle sambutan">Karya yang lahir dari secangkir kopi dan baris-baris kode.</p>
-
-    <!-- Interactive project counter -->
-    <div class="project-stats">
-      <div class="stat-item">
-        <span class="stat-number" data-target="7">0</span>
-        <span class="stat-label">Projects</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="4">0</span>
-        <span class="stat-label">Tech Stacks</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="3">0</span>
-        <span class="stat-label">Clients</span>
-      </div>
+  <!-- Stats Row -->
+  <div class="arc-stats-row">
+    <div class="arc-stat">
+      <span class="arc-stat-num" data-target="7">0</span>
+      <span class="arc-stat-text">Projects Completed</span>
+    </div>
+    <div class="arc-stat">
+      <span class="arc-stat-num" data-target="5">0</span>
+      <span class="arc-stat-text">Tech Stacks</span>
+    </div>
+    <div class="arc-stat">
+      <span class="arc-stat-num" data-target="3">0</span>
+      <span class="arc-stat-text">Happy Clients</span>
     </div>
   </div>
 
-  <!-- Showcase Grid -->
-  <div class="container showcase-container">
+  <!-- Featured Hero: GoesTi Serve -->
+  <div class="arc-featured" data-reveal>
+    <div class="arc-featured-img">
+      <img src="img/projects/goestiserve.png" alt="GoesTi Serve">
+      <div class="arc-plus-overlay">
+        <div class="arc-plus">+</div>
+      </div>
+    </div>
+    <div class="arc-featured-info">
+      <span class="arc-cat">Business / Founded</span>
+      <h3 class="arc-featured-title">GoesTi Serve</h3>
+      <p class="arc-featured-tagline">Custom Apps Solution</p>
+      <p class="arc-featured-desc">Mendirikan usaha penyedia jasa pembuatan aplikasi custom. Dari konsep hingga deployment, membangun solusi digital yang tepat sasaran.</p>
+      <div class="arc-progress-wrap">
+        <div class="arc-progress-top"><span>Progress</span><span>100%</span></div>
+        <div class="arc-progress-track"><div class="arc-progress-fill" data-width="100"></div></div>
+      </div>
+      <div class="arc-tags">
+        <span>Laravel</span><span>Flutter</span><span>React</span><span>Node.js</span><span>Python</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- FEATURED: GoesTi Serve - Full width hero -->
-    <div class="showcase-hero" data-reveal>
-      <div class="showcase-hero-bg">
-        <img src="img/projects/goestiserve.png" alt="GoesTi Serve">
+  <!-- Project Grid 3x2 -->
+  <div class="arc-grid">
+
+    <div class="arc-grid-item" data-reveal>
+      <div class="arc-grid-img">
+        <img src="img/projects/assettolling.jpeg" alt="Asset Tooling">
+        <div class="arc-plus-overlay"><div class="arc-plus">+</div></div>
       </div>
-      <div class="showcase-hero-overlay"></div>
-      <div class="showcase-hero-content">
-        <span class="showcase-badge badge-gold">Founded Business</span>
-        <h3 class="showcase-hero-title">GoesTi Serve</h3>
-        <p class="showcase-hero-tagline">Custom Apps Solution</p>
-        <p class="showcase-hero-desc sambutan">Mendirikan usaha penyedia jasa pembuatan aplikasi custom. Dari konsep hingga deployment, kami membangun solusi digital yang tepat sasaran untuk kebutuhan bisnis dan personal.</p>
-        <div class="showcase-tech-stack">
-          <span>Laravel</span><span>Flutter</span><span>React</span><span>Node.js</span><span>Python</span>
+      <div class="arc-grid-info">
+        <span class="arc-cat">Web App</span>
+        <h4 class="arc-grid-title">Asset Tooling</h4>
+        <p class="arc-grid-desc">Manajemen inventaris & monitoring part tooling industri manufaktur.</p>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-top"><span>Progress</span><span>100%</span></div>
+          <div class="arc-progress-track"><div class="arc-progress-fill" data-width="100"></div></div>
         </div>
+        <div class="arc-tags"><span>Laravel</span><span>MySQL</span><span>Bootstrap</span></div>
       </div>
-      <div class="showcase-hero-glow"></div>
     </div>
 
-    <!-- Project Grid -->
-    <div class="showcase-grid">
-
-      <!-- Asset Tooling -->
-      <div class="showcase-item" data-reveal>
-        <div class="showcase-item-inner">
-          <div class="showcase-img">
-            <img src="img/projects/assettolling.jpeg" alt="Asset Tooling">
-            <div class="showcase-img-overlay">
-              <span class="showcase-peek">Lihat Detail</span>
-            </div>
-          </div>
-          <div class="showcase-info">
-            <span class="showcase-badge badge-cyan">Web App</span>
-            <h4 class="showcase-title">Asset Tooling</h4>
-            <p class="showcase-desc sambutan">Sistem manajemen inventaris & monitoring part tooling untuk industri manufaktur.</p>
-            <div class="showcase-progress-wrap">
-              <div class="showcase-progress-label">
-                <span>Completion</span><span>100%</span>
-              </div>
-              <div class="showcase-progress">
-                <div class="showcase-progress-bar" data-width="100"></div>
-              </div>
-            </div>
-            <div class="showcase-tech-stack">
-              <span>Laravel</span><span>MySQL</span><span>Bootstrap</span>
-            </div>
-          </div>
-        </div>
+    <div class="arc-grid-item" data-reveal>
+      <div class="arc-grid-img">
+        <img src="img/projects/invoice.jpeg" alt="PDF Invoice Mobile">
+        <div class="arc-plus-overlay"><div class="arc-plus">+</div></div>
       </div>
-
-      <!-- PDF Invoice Mobile -->
-      <div class="showcase-item" data-reveal>
-        <div class="showcase-item-inner">
-          <div class="showcase-img">
-            <img src="img/projects/invoice.jpeg" alt="PDF Invoice Mobile">
-            <div class="showcase-img-overlay">
-              <span class="showcase-peek">Lihat Detail</span>
-            </div>
-          </div>
-          <div class="showcase-info">
-            <span class="showcase-badge badge-green">Mobile App</span>
-            <h4 class="showcase-title">PDF Invoice Mobile</h4>
-            <p class="showcase-desc sambutan">Aplikasi Flutter pembuatan & pengelolaan invoice PDF otomatis di perangkat mobile.</p>
-            <div class="showcase-progress-wrap">
-              <div class="showcase-progress-label">
-                <span>Completion</span><span>100%</span>
-              </div>
-              <div class="showcase-progress">
-                <div class="showcase-progress-bar" data-width="100"></div>
-              </div>
-            </div>
-            <div class="showcase-tech-stack">
-              <span>Flutter</span><span>Dart</span><span>PDF Engine</span>
-            </div>
-          </div>
+      <div class="arc-grid-info">
+        <span class="arc-cat">Mobile App</span>
+        <h4 class="arc-grid-title">PDF Invoice Mobile</h4>
+        <p class="arc-grid-desc">Aplikasi Flutter pembuatan & pengelolaan invoice PDF otomatis.</p>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-top"><span>Progress</span><span>100%</span></div>
+          <div class="arc-progress-track"><div class="arc-progress-fill" data-width="100"></div></div>
         </div>
+        <div class="arc-tags"><span>Flutter</span><span>Dart</span><span>PDF Engine</span></div>
       </div>
-
-      <!-- Best Importir -->
-      <div class="showcase-item" data-reveal>
-        <div class="showcase-item-inner">
-          <div class="showcase-img">
-            <img src="img/projects/ecommerce.jpeg" alt="Best Importir">
-            <div class="showcase-img-overlay">
-              <span class="showcase-peek">Lihat Detail</span>
-            </div>
-          </div>
-          <div class="showcase-info">
-            <span class="showcase-badge badge-cyan">Web App</span>
-            <h4 class="showcase-title">Best Importir</h4>
-            <p class="showcase-desc sambutan">Platform e-commerce web ekspor impor dengan tracking orders dan lacak paket.</p>
-            <div class="showcase-progress-wrap">
-              <div class="showcase-progress-label">
-                <span>Completion</span><span>100%</span>
-              </div>
-              <div class="showcase-progress">
-                <div class="showcase-progress-bar" data-width="100"></div>
-              </div>
-            </div>
-            <div class="showcase-tech-stack">
-              <span>PHP</span><span>MySQL</span><span>Bootstrap</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bot Angkatan -->
-      <div class="showcase-item" data-reveal>
-        <div class="showcase-item-inner">
-          <div class="showcase-img">
-            <img src="img/projects/bot-angkatan.png" alt="Bot Angkatan">
-            <div class="showcase-img-overlay">
-              <span class="showcase-peek">Lihat Detail</span>
-            </div>
-          </div>
-          <div class="showcase-info">
-            <span class="showcase-badge badge-purple">Bot + AI</span>
-            <h4 class="showcase-title">Bot Angkatan</h4>
-            <p class="showcase-desc sambutan">WhatsApp Bot komunitas dengan AI, manajemen keanggotaan, keuangan, dan dashboard analitik.</p>
-            <div class="showcase-progress-wrap">
-              <div class="showcase-progress-label">
-                <span>Completion</span><span>90%</span>
-              </div>
-              <div class="showcase-progress">
-                <div class="showcase-progress-bar" data-width="90"></div>
-              </div>
-            </div>
-            <div class="showcase-tech-stack">
-              <span>Node.js</span><span>Baileys</span><span>React</span><span>Groq AI</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Trading Finance -->
-      <div class="showcase-item" data-reveal>
-        <div class="showcase-item-inner">
-          <div class="showcase-img">
-            <img src="img/projects/trading.png" alt="Trading Finance">
-            <div class="showcase-img-overlay">
-              <span class="showcase-peek">Lihat Detail</span>
-            </div>
-          </div>
-          <div class="showcase-info">
-            <span class="showcase-badge badge-orange">Finance</span>
-            <h4 class="showcase-title">Trading Finance</h4>
-            <p class="showcase-desc sambutan">Sistem analisis saham IDX dengan technical analysis dan market regime detection.</p>
-            <div class="showcase-progress-wrap">
-              <div class="showcase-progress-label">
-                <span>Completion</span><span>85%</span>
-              </div>
-              <div class="showcase-progress">
-                <div class="showcase-progress-bar" data-width="85"></div>
-              </div>
-            </div>
-            <div class="showcase-tech-stack">
-              <span>Python</span><span>Pandas</span><span>Matplotlib</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grooky -->
-      <div class="showcase-item" data-reveal>
-        <div class="showcase-item-inner">
-          <div class="showcase-img">
-            <img src="img/projects/urmoney.jpg" alt="Grooky">
-            <div class="showcase-img-overlay">
-              <span class="showcase-peek">Lihat Detail</span>
-            </div>
-          </div>
-          <div class="showcase-info">
-            <span class="showcase-badge badge-orange">Finance</span>
-            <h4 class="showcase-title">Grooky</h4>
-            <p class="showcase-desc sambutan">Asisten keuangan pribadi berbasis AI. Catat transaksi, pantau budget, dan insight via chat.</p>
-            <div class="showcase-progress-wrap">
-              <div class="showcase-progress-label">
-                <span>Completion</span><span>75%</span>
-              </div>
-              <div class="showcase-progress">
-                <div class="showcase-progress-bar" data-width="75"></div>
-              </div>
-            </div>
-            <div class="showcase-tech-stack">
-              <span>Python</span><span>Flask</span><span>Groq AI</span><span>Bootstrap</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="arc-grid-item" data-reveal>
+      <div class="arc-grid-img">
+        <img src="img/projects/ecommerce.jpeg" alt="Best Importir">
+        <div class="arc-plus-overlay"><div class="arc-plus">+</div></div>
+      </div>
+      <div class="arc-grid-info">
+        <span class="arc-cat">Web App</span>
+        <h4 class="arc-grid-title">Best Importir</h4>
+        <p class="arc-grid-desc">Platform e-commerce web ekspor impor dengan tracking orders.</p>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-top"><span>Progress</span><span>100%</span></div>
+          <div class="arc-progress-track"><div class="arc-progress-fill" data-width="100"></div></div>
+        </div>
+        <div class="arc-tags"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
+      </div>
+    </div>
+
+    <div class="arc-grid-item" data-reveal>
+      <div class="arc-grid-img">
+        <img src="img/projects/bot-angkatan.png" alt="Bot Angkatan">
+        <div class="arc-plus-overlay"><div class="arc-plus">+</div></div>
+      </div>
+      <div class="arc-grid-info">
+        <span class="arc-cat">Bot + AI</span>
+        <h4 class="arc-grid-title">Bot Angkatan</h4>
+        <p class="arc-grid-desc">WhatsApp Bot komunitas dengan AI, keuangan, dan dashboard analitik.</p>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-top"><span>Progress</span><span>90%</span></div>
+          <div class="arc-progress-track"><div class="arc-progress-fill" data-width="90"></div></div>
+        </div>
+        <div class="arc-tags"><span>Node.js</span><span>Baileys</span><span>React</span><span>Groq AI</span></div>
+      </div>
+    </div>
+
+    <div class="arc-grid-item" data-reveal>
+      <div class="arc-grid-img">
+        <img src="img/projects/trading.png" alt="Trading Finance">
+        <div class="arc-plus-overlay"><div class="arc-plus">+</div></div>
+      </div>
+      <div class="arc-grid-info">
+        <span class="arc-cat">Finance</span>
+        <h4 class="arc-grid-title">Trading Finance</h4>
+        <p class="arc-grid-desc">Analisis saham IDX dengan technical analysis & market regime detection.</p>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-top"><span>Progress</span><span>85%</span></div>
+          <div class="arc-progress-track"><div class="arc-progress-fill" data-width="85"></div></div>
+        </div>
+        <div class="arc-tags"><span>Python</span><span>Pandas</span><span>Matplotlib</span></div>
+      </div>
+    </div>
+
+    <div class="arc-grid-item" data-reveal>
+      <div class="arc-grid-img">
+        <img src="img/projects/urmoney.jpg" alt="Grooky">
+        <div class="arc-plus-overlay"><div class="arc-plus">+</div></div>
+      </div>
+      <div class="arc-grid-info">
+        <span class="arc-cat">Finance</span>
+        <h4 class="arc-grid-title">Grooky</h4>
+        <p class="arc-grid-desc">Asisten keuangan pribadi berbasis AI. Catat transaksi & insight via chat.</p>
+        <div class="arc-progress-wrap">
+          <div class="arc-progress-top"><span>Progress</span><span>75%</span></div>
+          <div class="arc-progress-track"><div class="arc-progress-fill" data-width="75"></div></div>
+        </div>
+        <div class="arc-tags"><span>Python</span><span>Flask</span><span>Groq AI</span></div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Download CV -->
-  <div class="cv-section">
-    <div class="arcane-divider" style="margin-bottom:40px;">
-      <div class="arcane-line"></div>
-      <div class="arcane-diamond"></div>
-      <div class="arcane-line"></div>
-    </div>
-    <p class="cv-text sambutan">Tertarik berkolaborasi? Unduh CV saya untuk mengetahui lebih lanjut.</p>
-    <a href="files/cv-rizky-agusti.pdf" download class="cv-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download CV
+  <div class="arc-cv">
+    <div class="arc-cv-line"></div>
+    <p class="arc-cv-text">Tertarik berkolaborasi?</p>
+    <a href="files/cv-rizky-agusti.pdf" download class="arc-cv-btn">
+      <span>Download CV</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     </a>
-  </div>
-
-  <div class="arcane-divider" style="margin-top:60px;">
-    <div class="arcane-line"></div>
-    <div class="arcane-diamond"></div>
-    <div class="arcane-line"></div>
   </div>
 
 </div>
 
-<!-- Projects interactive JS -->
+<!-- Projects JS -->
 <script>
 (function(){
-  // Counter animation
   function animateCounters(){
-    document.querySelectorAll('.stat-number').forEach(function(el){
-      var target=parseInt(el.getAttribute('data-target'));
-      var current=0;
-      var step=Math.ceil(target/40);
-      var timer=setInterval(function(){
-        current+=step;
-        if(current>=target){current=target;clearInterval(timer);}
-        el.textContent=current;
-      },50);
+    document.querySelectorAll('.arc-stat-num').forEach(function(el){
+      var target=parseInt(el.getAttribute('data-target')),c=0,s=Math.ceil(target/40);
+      var t=setInterval(function(){c+=s;if(c>=target){c=target;clearInterval(t);}el.textContent=c;},50);
     });
   }
-
-  // Progress bar animation
-  function animateProgressBars(){
-    document.querySelectorAll('.showcase-progress-bar').forEach(function(bar){
-      var w=bar.getAttribute('data-width');
-      bar.style.width=w+'%';
-    });
+  function animateBars(){
+    document.querySelectorAll('.arc-progress-fill').forEach(function(b){b.style.width=b.getAttribute('data-width')+'%';});
   }
-
-  // Scroll reveal
-  var revealed=false;
-  function checkReveal(){
-    var section=document.getElementById('Projects');
-    if(!section)return;
-    var rect=section.getBoundingClientRect();
-    if(rect.top<window.innerHeight*0.75 && !revealed){
-      revealed=true;
-      animateCounters();
-      setTimeout(animateProgressBars,400);
+  var done=false;
+  function check(){
+    var s=document.getElementById('Projects');if(!s)return;
+    if(s.getBoundingClientRect().top<window.innerHeight*0.8&&!done){
+      done=true;animateCounters();setTimeout(animateBars,500);
       document.querySelectorAll('[data-reveal]').forEach(function(el,i){
-        setTimeout(function(){el.classList.add('revealed');},i*150);
+        setTimeout(function(){el.classList.add('revealed');},i*120);
       });
     }
   }
-  window.addEventListener('scroll',checkReveal);
-  window.addEventListener('load',checkReveal);
+  window.addEventListener('scroll',check);window.addEventListener('load',check);
+
+  // Scroll title parallax
+  window.addEventListener('scroll',function(){
+    var t=document.querySelector('[data-scroll-title]');if(!t)return;
+    var r=t.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      var p=(window.innerHeight-r.top)/(window.innerHeight+r.height);
+      t.style.transform='translateY('+(p*-30)+'px)';
+    }
+  });
 })();
 </script>
 <!-- projects -->
