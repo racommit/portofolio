@@ -241,57 +241,91 @@ html{
 
 
 
-#bg-loader{
+/* ── Arcane-themed loader ── */
+#bg-loader {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  background-color: black;
+  background: #050810;
   width: 100%;
   height: 100%;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
   z-index: 9999;
-  padding: 15px 30px;
 }
 
-#bg-loader .loader{
-  border:5px solid white;
-  width:50px;
-  height: 50px;
-  border-radius: 200%;
-  border-top: 5px solid #1655e9;
-  border-right: 5px solid #1655e9;
-  border-bottom: 5px solid #1655e9;
-  position: fixed;
-  z-index: 9999;
-  animation: putar .5s  infinite;
-}
-
-#bg-loader h1{
+#bg-loader::before {
+  content: '';
   position: absolute;
-  color:white;
-  z-index: 999999;
-  margin-bottom: 200px;
-  animation: kedip .9s infinite;
-  transition: .5s;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(184,151,46,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at center, transparent 50%, rgba(5,8,16,0.7) 100%);
+  pointer-events: none;
 }
 
-@keyframes putar{
-  100%{
-      transform: rotate(360deg);
-  }
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  z-index: 1;
 }
 
-@keyframes kedip{
-  0%{
-    display: block;
-    color:black;
-  }100%{
-    display: none;
-  }
+/* Spinning diamond */
+.loader-diamond {
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(184,151,46,0.5);
+  transform: rotate(45deg);
+  animation: loaderSpin 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  box-shadow: 0 0 20px rgba(184,151,46,0.15), inset 0 0 10px rgba(184,151,46,0.08);
+}
+
+@keyframes loaderSpin {
+  0%   { transform: rotate(45deg) scale(1); border-color: rgba(184,151,46,0.5); }
+  50%  { transform: rotate(225deg) scale(1.15); border-color: rgba(184,151,46,0.8); box-shadow: 0 0 30px rgba(184,151,46,0.3); }
+  100% { transform: rotate(405deg) scale(1); border-color: rgba(184,151,46,0.5); }
+}
+
+/* Progress line */
+.loader-line {
+  width: 120px;
+  height: 1px;
+  background: rgba(184,151,46,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(184,151,46,0.6), transparent);
+  animation: loaderSlide 1.5s ease-in-out infinite;
+}
+
+@keyframes loaderSlide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* Loader text */
+.loader-text {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(184,151,46,0.35);
+  animation: loaderFade 2s ease-in-out infinite;
+}
+
+@keyframes loaderFade {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.7; }
 }
 
 .penghargaan a {
