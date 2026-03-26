@@ -1,21 +1,3 @@
-/* ============================================
-   ARCANE / HEXTECH DOOR SPLASH PAGE
-   ============================================ */
-
-:root {
-  --dark-bg: #0a0a1a;
-  --dark-metal: #1a1a2e;
-  --dark-panel: #12122a;
-  --gold: #c8a84e;
-  --gold-dim: #8a7034;
-  --gold-glow: rgba(200, 168, 78, 0.6);
-  --hex-blue: #1a9fff;
-  --hex-blue-dim: #0d5a9e;
-  --hex-blue-glow: rgba(26, 159, 255, 0.5);
-  --hex-cyan: #00e5ff;
-  --reveal-light: #d4eaff;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -26,186 +8,69 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #050810;
+  font-family: 'Georgia', 'Times New Roman', serif;
 }
 
-body {
-  background: var(--dark-bg);
+/* ── Scene wrapper with perspective ── */
+.scene {
+  width: 100vw;
+  height: 100vh;
+  perspective: 1800px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---- Hex grid background (CSS only) ---- */
-body::before {
-  content: '';
+.scene.opened {
+  transform: scale(1.08);
+}
+
+/* ── Light flood behind doors ── */
+.light-flood {
   position: fixed;
-  inset: 0;
-  background-image:
-    /* Hex dots pattern using radial gradients arranged in offset grid */
-    radial-gradient(circle, rgba(26, 159, 255, 0.08) 1px, transparent 1px),
-    radial-gradient(circle, rgba(26, 159, 255, 0.08) 1px, transparent 1px);
-  background-size: 40px 46px;
-  background-position: 0 0, 20px 23px;
-  z-index: 0;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    /* Subtle hex-like line grid */
-    repeating-linear-gradient(
-      60deg,
-      transparent,
-      transparent 38px,
-      rgba(26, 159, 255, 0.03) 38px,
-      rgba(26, 159, 255, 0.03) 40px
-    ),
-    repeating-linear-gradient(
-      -60deg,
-      transparent,
-      transparent 38px,
-      rgba(26, 159, 255, 0.03) 38px,
-      rgba(26, 159, 255, 0.03) 40px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 38px,
-      rgba(200, 168, 78, 0.02) 38px,
-      rgba(200, 168, 78, 0.02) 40px
-    );
-  z-index: 0;
-}
-
-/* ============================================
-   FLOATING PARTICLES
-   ============================================ */
-.particles {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--hex-blue);
-  box-shadow: 0 0 6px var(--hex-blue-glow), 0 0 12px var(--hex-blue-glow);
-  animation: particleFloat linear infinite;
-  opacity: 0;
-}
-
-.particle:nth-child(odd) {
-  background: var(--gold);
-  box-shadow: 0 0 6px var(--gold-glow), 0 0 12px var(--gold-glow);
-}
-
-.particle:nth-child(1)  { left:  5%; animation-duration: 8s;  animation-delay: 0s;   width: 2px; height: 2px; }
-.particle:nth-child(2)  { left: 12%; animation-duration: 10s; animation-delay: 1s; }
-.particle:nth-child(3)  { left: 20%; animation-duration: 7s;  animation-delay: 2s;   width: 4px; height: 4px; }
-.particle:nth-child(4)  { left: 28%; animation-duration: 9s;  animation-delay: 0.5s; }
-.particle:nth-child(5)  { left: 35%; animation-duration: 11s; animation-delay: 3s;   width: 2px; height: 2px; }
-.particle:nth-child(6)  { left: 42%; animation-duration: 8s;  animation-delay: 1.5s; }
-.particle:nth-child(7)  { left: 50%; animation-duration: 7s;  animation-delay: 0s;   width: 4px; height: 4px; }
-.particle:nth-child(8)  { left: 57%; animation-duration: 12s; animation-delay: 2.5s; }
-.particle:nth-child(9)  { left: 65%; animation-duration: 9s;  animation-delay: 1s;   width: 2px; height: 2px; }
-.particle:nth-child(10) { left: 72%; animation-duration: 10s; animation-delay: 3.5s; }
-.particle:nth-child(11) { left: 78%; animation-duration: 8s;  animation-delay: 0.5s; }
-.particle:nth-child(12) { left: 85%; animation-duration: 11s; animation-delay: 2s;   width: 4px; height: 4px; }
-.particle:nth-child(13) { left: 90%; animation-duration: 7s;  animation-delay: 1.5s; width: 2px; height: 2px; }
-.particle:nth-child(14) { left: 95%; animation-duration: 9s;  animation-delay: 0s; }
-.particle:nth-child(15) { left:  8%; animation-duration: 13s; animation-delay: 4s; }
-.particle:nth-child(16) { left: 18%; animation-duration: 10s; animation-delay: 2s;   width: 2px; height: 2px; }
-.particle:nth-child(17) { left: 48%; animation-duration: 8s;  animation-delay: 3s; }
-.particle:nth-child(18) { left: 60%; animation-duration: 11s; animation-delay: 1s;   width: 4px; height: 4px; }
-.particle:nth-child(19) { left: 75%; animation-duration: 9s;  animation-delay: 0.5s; width: 2px; height: 2px; }
-.particle:nth-child(20) { left: 88%; animation-duration: 7s;  animation-delay: 2.5s; }
-
-@keyframes particleFloat {
-  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
-  10%  { opacity: 0.8; }
-  90%  { opacity: 0.8; }
-  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
-}
-
-/* ============================================
-   ENERGY BURST (center explosion on click)
-   ============================================ */
-.energy-burst {
-  position: fixed;
-  top: 50%;
+  top: 0;
   left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(26, 159, 255, 0.8), rgba(200, 168, 78, 0.4), transparent);
-  transform: translate(-50%, -50%);
-  z-index: 10;
+  width: 2px;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(255,248,230,0.6) 0%, transparent 70%);
+  transform: translateX(-50%);
+  z-index: 1;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 1.5s ease;
   pointer-events: none;
-  opacity: 0;
-  transition: none;
 }
 
-.energy-burst.active {
-  animation: burstExpand 0.6s ease-out forwards;
+.scene.opened .light-flood {
+  width: 100vw;
+  background: radial-gradient(ellipse at center, rgba(255,252,240,0.95) 0%, rgba(255,248,230,0.7) 40%, transparent 80%);
 }
 
-@keyframes burstExpand {
-  0%   { width: 0; height: 0; opacity: 1; }
-  60%  { opacity: 0.8; }
-  100% { width: 250vmax; height: 250vmax; opacity: 0; }
-}
-
-/* ============================================
-   REVEAL LIGHT (behind doors)
-   ============================================ */
-.reveal-light {
+/* ── White-out overlay ── */
+.whiteout {
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at center, var(--reveal-light), rgba(26, 159, 255, 0.3), transparent 70%);
-  z-index: 2;
+  background: #fffcf0;
   opacity: 0;
+  z-index: 100;
   pointer-events: none;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.8s ease 0.9s;
 }
 
-.reveal-light.active {
+.scene.opened .whiteout {
   opacity: 1;
-  animation: revealPulse 1.5s ease-in forwards;
 }
 
-@keyframes revealPulse {
-  0%   { opacity: 0; }
-  30%  { opacity: 0.6; }
-  100% { opacity: 1; background: radial-gradient(ellipse at center, #fff, var(--reveal-light) 40%, rgba(26, 159, 255, 0.2) 70%, transparent 90%); }
-}
-
-/* ============================================
-   DOOR SCENE
-   ============================================ */
-.door-scene {
-  position: relative;
-  width: min(90vw, 700px);
-  height: min(85vh, 600px);
-  perspective: 1200px;
-  z-index: 5;
-  display: flex;
-}
-
-/* ---- Individual Door ---- */
+/* ── Door panels ── */
 .door {
-  width: 50%;
-  height: 100%;
+  width: 50vw;
+  height: 100vh;
   position: relative;
-  transition: transform 1.2s cubic-bezier(0.32, 0, 0.15, 1);
+  background: linear-gradient(180deg, #0d1220 0%, #0a0e1a 40%, #080c17 100%);
   transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  overflow: hidden;
 }
 
 .door-left {
@@ -216,420 +81,303 @@ body::after {
   transform-origin: right center;
 }
 
-.door-left.open {
-  transform: rotateY(-110deg);
+.scene.opened .door-left {
+  transform: rotateY(-105deg);
 }
 
-.door-right.open {
-  transform: rotateY(110deg);
+.scene.opened .door-right {
+  transform: rotateY(105deg);
 }
 
-/* ---- Door Face ---- */
-.door-face {
-  width: 100%;
-  height: 100%;
-  position: relative;
+/* ── Subtle vertical grooves ── */
+.door::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 48px,
+    rgba(255,255,255,0.012) 48px,
+    rgba(255,255,255,0.012) 49px
+  );
+  pointer-events: none;
+}
+
+/* ── Faint ambient glow on surface ── */
+.door::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(170deg, #1e1e3a 0%, var(--dark-metal) 40%, #0f0f24 100%);
-  border: 2px solid var(--gold-dim);
-  box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.5),
-    inset 0 0 60px rgba(26, 159, 255, 0.05),
-    0 0 15px rgba(0, 0, 0, 0.8);
-  overflow: hidden;
+    radial-gradient(ellipse at 50% 30%, rgba(58,123,213,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 80%, rgba(184,151,46,0.02) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-.door-left .door-face {
-  border-radius: 4px 0 0 4px;
-  border-right: 1px solid var(--gold-dim);
-}
-
-.door-right .door-face {
-  border-radius: 0 4px 4px 0;
-  border-left: 1px solid var(--gold-dim);
-}
-
-/* ---- Ornamental border inside door ---- */
+/* ── Gold inset border (picture-frame molding) ── */
 .door-border {
   position: absolute;
-  inset: 12px;
-  border: 1px solid var(--gold-dim);
-  border-radius: 2px;
-  opacity: 0.5;
-}
-
-.door-border::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1px solid rgba(26, 159, 255, 0.15);
-}
-
-.door-border::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60%;
-  height: 60%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  border: 1px solid var(--gold-dim);
-  opacity: 0.3;
-}
-
-/* ---- Rune circle (central ornament per door) ---- */
-.rune-circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80px;
-  height: 80px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  box-shadow:
-    0 0 15px var(--gold-glow),
-    inset 0 0 10px var(--gold-glow);
-  animation: runeGlow 3s ease-in-out infinite alternate;
-}
-
-.rune-inner {
-  position: absolute;
-  inset: 10px;
-  border-radius: 50%;
-  border: 1px solid var(--hex-blue);
-  box-shadow: 0 0 8px var(--hex-blue-glow), inset 0 0 8px var(--hex-blue-glow);
-}
-
-.rune-inner::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1px dashed var(--gold-dim);
-  border-radius: 50%;
-  animation: runeRotate 12s linear infinite;
-}
-
-.rune-inner::after {
-  /* Hexagon shape in center */
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  transform: translate(-50%, -50%) rotate(30deg);
-  background: var(--hex-blue);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  box-shadow: 0 0 10px var(--hex-blue-glow);
-  animation: runeGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes runeGlow {
-  0%   { opacity: 0.6; filter: brightness(0.8); }
-  100% { opacity: 1;   filter: brightness(1.2); }
-}
-
-@keyframes runeRotate {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* ---- Circuit lines (glowing hextech wires) ---- */
-.circuit {
-  position: absolute;
-  width: 2px;
-  background: linear-gradient(to bottom, transparent, var(--hex-blue), transparent);
-  opacity: 0.5;
-  animation: circuitPulse 4s ease-in-out infinite;
-}
-
-.circuit::before,
-.circuit::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--hex-blue);
-  box-shadow: 0 0 6px var(--hex-blue-glow);
-  left: -2px;
-}
-
-.circuit::before { top: 0; }
-.circuit::after  { bottom: 0; }
-
-.circuit-top-left {
   top: 30px;
-  left: 35px;
-  height: 80px;
-  transform: rotate(15deg);
-}
-
-.circuit-bottom-left {
   bottom: 30px;
-  left: 35px;
-  height: 60px;
-  transform: rotate(-10deg);
-  animation-delay: 1s;
+  width: calc(100% - 30px);
+  border: 1px solid rgba(184,151,46,0.18);
+  pointer-events: none;
 }
 
-.circuit-top-right {
-  top: 30px;
-  right: 35px;
-  height: 80px;
-  transform: rotate(-15deg);
-  animation-delay: 0.5s;
-}
-
-.circuit-bottom-right {
-  bottom: 30px;
-  right: 35px;
-  height: 60px;
-  transform: rotate(10deg);
-  animation-delay: 1.5s;
-}
-
-@keyframes circuitPulse {
-  0%, 100% { opacity: 0.3; }
-  50%      { opacity: 0.8; }
-}
-
-/* ---- Hex Rivets ---- */
-.rivet {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
-  box-shadow: 0 0 4px var(--gold-glow);
-}
-
-.rivet-1 { top: 20px;  left: 20px; }
-.rivet-2 { top: 20px;  right: 20px; }
-.rivet-3 { bottom: 20px; left: 20px; }
-.rivet-4 { bottom: 20px; right: 20px; }
-
-/* ---- Vertical glow strip (edge light) ---- */
-.glow-strip {
-  position: absolute;
-  top: 0;
-  width: 3px;
-  height: 100%;
-  animation: stripGlow 2.5s ease-in-out infinite alternate;
-}
-
-.glow-strip-right {
+.door-left .door-border {
+  left: 30px;
   right: 0;
-  background: linear-gradient(to bottom, transparent 10%, var(--hex-blue) 30%, var(--gold) 50%, var(--hex-blue) 70%, transparent 90%);
-  opacity: 0.4;
+  border-right: none;
 }
 
-.glow-strip-left {
+.door-right .door-border {
+  right: 30px;
   left: 0;
-  background: linear-gradient(to bottom, transparent 10%, var(--hex-blue) 30%, var(--gold) 50%, var(--hex-blue) 70%, transparent 90%);
-  opacity: 0.4;
+  border-left: none;
 }
 
-@keyframes stripGlow {
-  0%   { opacity: 0.2; }
-  100% { opacity: 0.6; }
-}
-
-/* ---- Ambient surface glow on door face ---- */
-.door-face::before {
-  content: '';
+/* ── Inner border (double frame effect) ── */
+.door-border-inner {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(ellipse at 60% 40%, rgba(26, 159, 255, 0.06), transparent 60%);
-  animation: ambientShift 6s ease-in-out infinite alternate;
+  top: 50px;
+  bottom: 50px;
+  width: calc(100% - 50px);
+  border: 1px solid rgba(184,151,46,0.08);
   pointer-events: none;
 }
 
-.door-face::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
+.door-left .door-border-inner {
+  left: 50px;
+  right: 0;
+  border-right: none;
+}
+
+.door-right .door-border-inner {
+  right: 50px;
   left: 0;
+  border-left: none;
+}
+
+/* ── Art Deco center ornament (thin lines, very subtle) ── */
+.door-ornament {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.door-left .door-ornament {
+  right: 0;
+}
+
+.door-right .door-ornament {
+  left: 0;
+}
+
+.door-ornament svg {
   width: 100%;
-  height: 40%;
-  background: linear-gradient(to top, rgba(200, 168, 78, 0.04), transparent);
+  height: 100%;
+  overflow: visible;
+}
+
+.door-ornament line,
+.door-ornament polyline,
+.door-ornament polygon {
+  stroke: rgba(184,151,46,0.13);
+  stroke-width: 0.5;
+  fill: none;
+}
+
+/* ── Center seam glow ── */
+.seam-glow {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255,248,220,0.08) 20%,
+    rgba(255,248,220,0.15) 50%,
+    rgba(255,248,220,0.08) 80%,
+    transparent 100%
+  );
+  z-index: 20;
   pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
-@keyframes ambientShift {
-  0%   { transform: translate(0, 0); }
-  100% { transform: translate(5%, 3%); }
+.scene.opened .seam-glow {
+  opacity: 0;
 }
 
-/* ============================================
-   PUSH BUTTON
-   ============================================ */
-.push-container {
-  position: absolute;
+/* ── Center element: diamond + ENTER ── */
+.center-element {
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.push-container.hidden {
+.scene.opened .center-element {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.5);
+  transition: opacity 0.4s ease;
   pointer-events: none;
 }
 
-.push-btn {
-  position: relative;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  background: radial-gradient(circle at 40% 35%, #2a2a4a, var(--dark-metal) 70%, #0a0a1a);
-  cursor: pointer;
+/* Horizontal line with diamond */
+.diamond-line {
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow:
-    0 0 20px var(--gold-glow),
-    0 0 40px rgba(26, 159, 255, 0.2),
-    inset 0 0 15px rgba(0, 0, 0, 0.5);
+  gap: 0;
+  width: 120px;
+  position: relative;
 }
 
-.push-btn:hover {
-  box-shadow:
-    0 0 30px var(--gold-glow),
-    0 0 60px var(--hex-blue-glow),
-    inset 0 0 15px rgba(0, 0, 0, 0.5);
-  border-color: var(--hex-blue);
-  transform: scale(1.05);
+.diamond-line::before,
+.diamond-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,151,46,0.35));
 }
 
-.push-btn:active {
-  transform: scale(0.95);
+.diamond-line::after {
+  background: linear-gradient(90deg, rgba(184,151,46,0.35), transparent);
 }
 
-.push-btn.activated {
-  border-color: var(--hex-cyan);
-  box-shadow:
-    0 0 40px rgba(0, 229, 255, 0.6),
-    0 0 80px rgba(0, 229, 255, 0.3);
+.diamond {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(184,151,46,0.4);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  transition: border-color 0.4s ease,
+              box-shadow 0.4s ease;
 }
 
-.push-text {
-  color: var(--gold);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  z-index: 2;
-  text-shadow: 0 0 8px var(--gold-glow);
-  transition: color 0.3s ease;
+.center-element:hover .diamond {
+  border-color: rgba(184,151,46,0.7);
+  box-shadow: 0 0 15px rgba(184,151,46,0.2),
+              inset 0 0 8px rgba(184,151,46,0.1);
 }
 
-.push-btn:hover .push-text {
-  color: var(--hex-blue);
-  text-shadow: 0 0 12px var(--hex-blue-glow);
+.center-element:active .diamond {
+  border-color: rgba(184,151,46,0.9);
+  box-shadow: 0 0 30px rgba(184,151,46,0.4),
+              inset 0 0 15px rgba(184,151,46,0.2);
 }
 
-.push-btn.activated .push-text {
-  color: var(--hex-cyan);
+.enter-text {
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(184,151,46,0.35);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  transition: color 0.4s ease,
+              text-shadow 0.4s ease;
+  user-select: none;
+  padding-left: 6px;
 }
 
-/* ---- Hextech glowing rings around button ---- */
-.push-ring {
-  position: absolute;
-  inset: -12px;
-  border-radius: 50%;
-  border: 1px solid var(--hex-blue);
-  opacity: 0.4;
-  animation: ringPulse 2s ease-in-out infinite;
+.center-element:hover .enter-text {
+  color: rgba(184,151,46,0.65);
+  text-shadow: 0 0 20px rgba(184,151,46,0.15);
 }
 
-.push-ring-2 {
-  inset: -24px;
-  border-color: var(--gold);
-  opacity: 0.2;
-  animation-delay: 1s;
-  animation-duration: 3s;
+.center-element:active .enter-text {
+  color: rgba(184,151,46,0.9);
+  text-shadow: 0 0 30px rgba(184,151,46,0.3);
 }
 
-@keyframes ringPulse {
-  0%, 100% { transform: scale(1);   opacity: 0.2; }
-  50%      { transform: scale(1.08); opacity: 0.5; }
+/* ── Ambient edge vignette ── */
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(5,8,16,0.6) 100%);
+  z-index: 5;
+  pointer-events: none;
 }
 
-/* ============================================
-   DOOR OPEN STATE additional effects
-   ============================================ */
-.door-scene.opened .door-face {
-  box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(26, 159, 255, 0.3);
-}
-
-/* ============================================
-   MOBILE RESPONSIVE
-   ============================================ */
-@media (max-width: 600px) {
-  .door-scene {
-    width: 92vw;
-    height: 70vh;
-    perspective: 900px;
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  .door-border {
+    top: 20px;
+    bottom: 20px;
   }
 
-  .rune-circle {
-    width: 55px;
-    height: 55px;
+  .door-left .door-border {
+    left: 20px;
   }
 
-  .rune-inner::after {
-    width: 12px;
-    height: 12px;
+  .door-right .door-border {
+    right: 20px;
   }
 
-  .push-btn {
-    width: 72px;
-    height: 72px;
+  .door-border-inner {
+    top: 35px;
+    bottom: 35px;
   }
 
-  .push-text {
-    font-size: 11px;
-    letter-spacing: 3px;
+  .door-left .door-border-inner {
+    left: 35px;
   }
 
-  .push-ring {
-    inset: -8px;
+  .door-right .door-border-inner {
+    right: 35px;
   }
 
-  .push-ring-2 {
-    inset: -18px;
+  .diamond-line {
+    width: 90px;
   }
 
-  .circuit {
+  .enter-text {
+    font-size: 10px;
+    letter-spacing: 5px;
+  }
+
+  .door-ornament {
+    width: 40px;
+    height: 140px;
+  }
+
+  .scene {
+    perspective: 1200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .door-border {
+    top: 15px;
+    bottom: 15px;
+  }
+
+  .door-left .door-border {
+    left: 15px;
+  }
+
+  .door-right .door-border {
+    right: 15px;
+  }
+
+  .door-border-inner {
     display: none;
   }
-}
 
-@media (max-width: 400px) {
-  .door-scene {
-    height: 60vh;
-    perspective: 700px;
+  .door-ornament {
+    width: 30px;
+    height: 100px;
   }
-
-  .rune-circle {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* ============================================
-   BACKFACE (visible when door swings open)
-   ============================================ */
-.door-face {
-  backface-visibility: visible;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,121 +16,77 @@
 </head>
 <body>
 
-  <!-- Floating particles -->
-  <div class="particles">
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
-    <span class="particle"></span>
+<div class="scene" id="scene">
+
+  <!-- Light flooding from behind doors -->
+  <div class="light-flood"></div>
+
+  <!-- White-out overlay for redirect -->
+  <div class="whiteout"></div>
+
+  <!-- Vignette -->
+  <div class="vignette"></div>
+
+  <!-- Left door -->
+  <div class="door door-left">
+    <div class="door-border"></div>
+    <div class="door-border-inner"></div>
+    <div class="door-ornament">
+      <svg viewBox="0 0 60 200">
+        <line x1="55" y1="0" x2="55" y2="200"/>
+        <line x1="45" y1="20" x2="45" y2="180"/>
+        <polyline points="45,60 55,50 45,40"/>
+        <polyline points="45,160 55,150 45,140"/>
+        <line x1="35" y1="80" x2="55" y2="80"/>
+        <line x1="35" y1="120" x2="55" y2="120"/>
+        <polygon points="50,95 55,100 50,105 45,100"/>
+      </svg>
+    </div>
   </div>
 
-  <!-- Energy burst overlay -->
-  <div class="energy-burst" id="energyBurst"></div>
-
-  <!-- Reveal light behind doors -->
-  <div class="reveal-light" id="revealLight"></div>
-
-  <!-- Door container with perspective -->
-  <div class="door-scene" id="doorScene">
-
-    <!-- Left door -->
-    <div class="door door-left" id="doorLeft">
-      <div class="door-face">
-        <!-- Hextech ornamental border -->
-        <div class="door-border"></div>
-        <!-- Central rune circle -->
-        <div class="rune-circle">
-          <div class="rune-inner"></div>
-        </div>
-        <!-- Circuit lines -->
-        <div class="circuit circuit-top-left"></div>
-        <div class="circuit circuit-bottom-left"></div>
-        <!-- Hex rivets -->
-        <div class="rivet rivet-1"></div>
-        <div class="rivet rivet-2"></div>
-        <div class="rivet rivet-3"></div>
-        <div class="rivet rivet-4"></div>
-        <!-- Vertical glow strip -->
-        <div class="glow-strip glow-strip-right"></div>
-      </div>
+  <!-- Right door -->
+  <div class="door door-right">
+    <div class="door-border"></div>
+    <div class="door-border-inner"></div>
+    <div class="door-ornament">
+      <svg viewBox="0 0 60 200">
+        <line x1="5" y1="0" x2="5" y2="200"/>
+        <line x1="15" y1="20" x2="15" y2="180"/>
+        <polyline points="15,60 5,50 15,40"/>
+        <polyline points="15,160 5,150 15,140"/>
+        <line x1="5" y1="80" x2="25" y2="80"/>
+        <line x1="5" y1="120" x2="25" y2="120"/>
+        <polygon points="10,95 5,100 10,105 15,100"/>
+      </svg>
     </div>
-
-    <!-- Right door -->
-    <div class="door door-right" id="doorRight">
-      <div class="door-face">
-        <div class="door-border"></div>
-        <div class="rune-circle">
-          <div class="rune-inner"></div>
-        </div>
-        <div class="circuit circuit-top-right"></div>
-        <div class="circuit circuit-bottom-right"></div>
-        <div class="rivet rivet-1"></div>
-        <div class="rivet rivet-2"></div>
-        <div class="rivet rivet-3"></div>
-        <div class="rivet rivet-4"></div>
-        <div class="glow-strip glow-strip-left"></div>
-      </div>
-    </div>
-
-    <!-- Center push button -->
-    <div class="push-container" id="pushContainer">
-      <button class="push-btn" id="pushBtn" onclick="openDoors()">
-        <span class="push-ring"></span>
-        <span class="push-ring push-ring-2"></span>
-        <span class="push-text">PUSH</span>
-      </button>
-    </div>
-
   </div>
 
-  <script>
-    function openDoors() {
-      var btn = document.getElementById('pushBtn');
-      var container = document.getElementById('pushContainer');
-      var doorLeft = document.getElementById('doorLeft');
-      var doorRight = document.getElementById('doorRight');
-      var burst = document.getElementById('energyBurst');
-      var reveal = document.getElementById('revealLight');
-      var scene = document.getElementById('doorScene');
+  <!-- Center seam glow -->
+  <div class="seam-glow"></div>
 
-      // Disable button
-      btn.disabled = true;
-      btn.classList.add('activated');
+  <!-- Center interactive element -->
+  <div class="center-element" id="enterBtn">
+    <div class="diamond-line">
+      <div class="diamond"></div>
+    </div>
+    <div class="enter-text">Enter</div>
+  </div>
 
-      // Energy burst
-      burst.classList.add('active');
+</div>
 
-      // After short delay, open doors
-      setTimeout(function() {
-        container.classList.add('hidden');
-        doorLeft.classList.add('open');
-        doorRight.classList.add('open');
-        reveal.classList.add('active');
-        scene.classList.add('opened');
-      }, 300);
-
-      // Redirect after animation
+<script>
+  (function() {
+    var triggered = false;
+    document.getElementById('enterBtn').addEventListener('click', function() {
+      if (triggered) return;
+      triggered = true;
+      document.getElementById('scene').classList.add('opened');
       setTimeout(function() {
         window.location.href = 'index2.html';
-      }, 1800);
-    }
-  </script>
+      }, 2000);
+    });
+  })();
+</script>
 
 </body>
 </html>
