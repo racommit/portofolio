@@ -72,11 +72,11 @@ body{margin:0;padding:0;background:#000;color:#fff;font-family:'Archivo',sans-se
 /* ══════════ HERO ══════════ */
 .arc-hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
 .arc-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-attachment:fixed}
-.arc-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.6) 50%,rgba(0,0,0,0.8) 100%)}
+.arc-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.3) 50%,rgba(0,0,0,0.5) 100%)}
 .arc-hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 40px;width:100%}
 
 .arc-hero-label{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:30px}
-.arc-hero-title{font-size:clamp(48px,10vw,120px);font-weight:900;line-height:0.9;letter-spacing:-3px;margin:0 0 24px}
+.arc-hero-title{font-size:clamp(48px,10vw,120px);font-weight:900;line-height:0.9;letter-spacing:-3px;margin:0 0 24px;text-shadow:0 4px 30px rgba(0,0,0,0.5)}
 .arc-hero-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,0.5);max-width:500px;line-height:1.7;margin-bottom:40px}
 
 .arc-hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
@@ -104,17 +104,18 @@ body{margin:0;padding:0;background:#000;color:#fff;font-family:'Archivo',sans-se
 
 /* ══════════ SKILLS ══════════ */
 .arc-skills{padding:120px 0;background:#f5f5f0;color:#111}
-.arc-skills .arc-label{color:rgba(0,0,0,0.4)}
-.arc-skills .arc-heading{color:#111}
-.arc-skills .arc-title-outline{-webkit-text-stroke:1.5px rgba(0,0,0,0.25);color:transparent}
 
-.arc-skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+.arc-skills-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
+.arc-skills-left{}
+.arc-skills-img-wrap{margin-top:30px;border-radius:4px;overflow:hidden}
+.arc-skills-img{width:100%;display:block;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,0.1)}
+.arc-skills-right{display:flex;flex-direction:column;gap:20px}
 
-.arc-skill-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:4px;padding:36px;transition:transform 0.4s,box-shadow 0.4s}
+.arc-skill-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:4px;padding:30px;transition:transform 0.4s,box-shadow 0.4s}
 .arc-skill-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.08)}
-.arc-skill-num{font-family:'Roboto Mono',monospace;font-size:12px;color:#4353ff;letter-spacing:2px;margin-bottom:12px}
-.arc-skill-name{font-size:22px;font-weight:700;color:#111;margin:0 0 20px}
-.arc-skill-desc{font-size:14px;font-weight:300;color:rgba(0,0,0,0.45);line-height:1.6;margin:16px 0 0}
+.arc-skill-num{font-family:'Roboto Mono',monospace;font-size:12px;color:#4353ff;letter-spacing:2px;margin-bottom:10px}
+.arc-skill-name{font-size:20px;font-weight:700;color:#111;margin:0 0 16px}
+.arc-skill-desc{font-size:13px;font-weight:300;color:rgba(0,0,0,0.45);line-height:1.6;margin:12px 0 0}
 
 /* Skills progress override for light bg */
 .arc-skills .arc-progress-top{color:rgba(0,0,0,0.3)}
@@ -222,10 +223,29 @@ body{margin:0;padding:0;background:#000;color:#fff;font-family:'Archivo',sans-se
 .arc-footer-note{font-style:italic}
 
 
+/* ══════════ PROJECT MODAL ══════════ */
+.arc-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.4s,visibility 0.4s;padding:40px}
+.arc-modal-overlay.active{opacity:1;visibility:visible}
+.arc-modal{background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:8px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(30px) scale(0.95);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:0 40px 80px rgba(0,0,0,0.5)}
+.arc-modal-overlay.active .arc-modal{transform:translateY(0) scale(1)}
+.arc-modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:24px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background 0.3s;line-height:1}
+.arc-modal-close:hover{background:#4353ff;border-color:#4353ff}
+.arc-modal-img{width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;background-color:#0a0a0a;border-radius:8px 8px 0 0}
+.arc-modal-img.arc-modal-img-contain{background-size:contain;background-repeat:no-repeat}
+.arc-modal-body{padding:32px}
+.arc-modal-title{font-size:28px;font-weight:700;color:#fff;margin:8px 0 16px;letter-spacing:-0.5px}
+.arc-modal-desc{font-size:15px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:24px}
+.arc-modal-tech-label{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px}
+
+/* Modal scrollbar */
+.arc-modal::-webkit-scrollbar{width:4px}
+.arc-modal::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:4px}
+
+
 /* ══════════ RESPONSIVE ══════════ */
 @media(max-width:991px){
   .arc-about-grid{grid-template-columns:1fr;gap:50px}
-  .arc-skills-grid{grid-template-columns:1fr}
+  .arc-skills-layout{grid-template-columns:1fr}
   .arc-grid{grid-template-columns:repeat(2,1fr);gap:24px}
   .arc-featured{grid-template-columns:1fr;gap:30px}
   .arc-timeline{grid-template-columns:1fr}
@@ -263,7 +283,10 @@ body{margin:0;padding:0;background:#000;color:#fff;font-family:'Archivo',sans-se
   .arc-footer-info{grid-template-columns:1fr;gap:30px}
   .arc-footer-bottom{flex-direction:column;gap:8px;text-align:center}
 
+  .arc-skills-layout{grid-template-columns:1fr}
   .arc-featured-title{font-size:28px}
+  .arc-modal-overlay{padding:20px}
+  .arc-modal-title{font-size:22px}
 }
 
 @media(max-width:480px){
