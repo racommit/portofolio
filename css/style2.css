@@ -107,15 +107,20 @@ body{margin:0;padding:0;background:#000;color:#fff;font-family:'Archivo',sans-se
 
 .arc-skills-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
 .arc-skills-left{}
+.arc-skills-intro{font-size:15px;font-weight:300;color:rgba(0,0,0,0.52);line-height:1.8;max-width:520px;margin:-10px 0 0}
 .arc-skills-img-wrap{margin-top:30px;border-radius:4px;overflow:hidden}
 .arc-skills-img{width:100%;display:block;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,0.1)}
 .arc-skills-right{display:flex;flex-direction:column;gap:20px}
 
-.arc-skill-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:4px;padding:30px;transition:transform 0.4s,box-shadow 0.4s}
-.arc-skill-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.08)}
+.arc-skill-card{background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:18px;padding:30px;transition:transform 0.4s,box-shadow 0.4s,border-color 0.4s}
+.arc-skill-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.08);border-color:rgba(67,83,255,0.16)}
 .arc-skill-num{font-family:'Roboto Mono',monospace;font-size:12px;color:#4353ff;letter-spacing:2px;margin-bottom:10px}
-.arc-skill-name{font-size:20px;font-weight:700;color:#111;margin:0 0 16px}
-.arc-skill-desc{font-size:13px;font-weight:300;color:rgba(0,0,0,0.45);line-height:1.6;margin:12px 0 0}
+.arc-skill-name{font-size:20px;font-weight:700;color:#111;margin:0 0 12px}
+.arc-skill-desc{font-size:14px;font-weight:300;color:rgba(0,0,0,0.48);line-height:1.75;margin:0 0 18px}
+.arc-skill-list{display:flex;flex-wrap:wrap;gap:10px}
+.arc-skill-list span{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1.3px;text-transform:uppercase;padding:7px 12px;border:1px solid rgba(0,0,0,0.1);border-radius:999px;background:rgba(67,83,255,0.04);color:rgba(0,0,0,0.62);transition:border-color 0.3s,color 0.3s,background 0.3s}
+.arc-skill-card:hover .arc-skill-list span{border-color:rgba(67,83,255,0.18)}
+.arc-skill-list span:hover{border-color:#4353ff;color:#4353ff;background:rgba(67,83,255,0.08)}
 
 /* Skills progress override for light bg */
 .arc-skills .arc-progress-top{color:rgba(0,0,0,0.3)}
